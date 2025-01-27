@@ -14,6 +14,12 @@ module.exports = {
         "button-primary": "#D9CAB3",
         "button-primary-hover": "#B9CAB8",
       },
+      fontFamily: {
+        notoTodhri: ['Noto Serif Todhri', 'serif'],
+
+        poppins: ['Poppins', 'sans-serif'],
+        custom: ['CustomFont', 'sans-serif', 'Poppins'], // Use your font name
+      },
     },
   },
   plugins: [],

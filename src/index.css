@@ -10,6 +10,22 @@
   box-sizing: border-box;
 }
 
+/* @font-face { */
+  /* font-family: 'CustomFont'; */
+  /* font-family: 'Poppins', sans-serif; */
+  /* font-family: 'Noto Serif Todhri', serif; */
+
+  /* src: url('../src/assets/Minimalist.otf') format('truetype'); */
+  /* font-weight: normal;
+  font-style: normal; */
+/* } */
+
+.playwrite-in-uniquifier {
+  font-family: "Playwrite IN", serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
 html,
 body {
   background-color: #000000;
