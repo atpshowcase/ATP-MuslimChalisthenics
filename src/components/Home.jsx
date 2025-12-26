@@ -106,9 +106,9 @@ function Hero() {
           className="mt-24 grid grid-cols-3 gap-8 max-w-3xl mx-auto"
         >
           {[
-            { number: "600+", label: "Members" },
+            { number: "4", label: "Trainers" },
+            { number: "1000+", label: "Members" },
             { number: "50+", label: "Events" },
-            { number: "4", label: "Trainers" }
           ].map((stat, index) => (
             <motion.div
               key={index}
@@ -129,7 +129,7 @@ function Hero() {
       </div>
 
       {/* Scroll Indicator */}
-      <motion.div
+      {/* <motion.div
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 1.5, repeat: Infinity }}
         className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
@@ -141,7 +141,7 @@ function Hero() {
             className="w-1.5 h-1.5 bg-[#F1CE06] rounded-full"
           />
         </div>
-      </motion.div>
+      </motion.div> */}
     </section>
   );
 }
