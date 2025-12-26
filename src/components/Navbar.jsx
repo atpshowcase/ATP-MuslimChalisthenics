@@ -5,111 +5,109 @@ function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
-  // Handle scroll to change navbar style on scroll
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 50);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Function to scroll to section
   const scrollToSection = (id) => {
     const section = document.getElementById(id);
     if (section) {
       section.scrollIntoView({ behavior: "smooth", block: "start" });
-      setIsOpen(false); // Close mobile menu after clicking a link
+      setIsOpen(false);
     }
   };
 
-  return (
-    <section
-      className={`bg-white shadow-sm py-4 z-40 font-custom sticky top-0 transition-all duration-300 ${isScrolled ? "text-white shadow-md" : ""
-        }`}
-    >
-      <div className="container mx-auto px-6 flex items-center justify-between">
-        {/* Desktop Menu */}
-        <div className="hidden md:flex space-x-6">
-          <button
-            onClick={() => scrollToSection("home")}
-            className="text-gray-800 hover:text-gray-600 text-sm font-semibold transition duration-300"
-          >
-            Home
-          </button>
-          <button
-            onClick={() => scrollToSection("events")}
-            className="text-gray-800 hover:text-gray-600 text-sm font-semibold transition duration-300"
-          >
-            Events
-          </button>
-          <button
-            onClick={() => scrollToSection("activity")}
-            className="text-gray-800 hover:text-gray-600 text-sm font-semibold transition duration-300"
-          >
-            Activity
-          </button>
-          <button
-            onClick={() => scrollToSection("trainer")}
-            className="text-gray-800 hover:text-gray-600 text-sm font-semibold transition duration-300"
-          >
-            Trainer
-          </button>
-          <button
-            onClick={() => scrollToSection("about")}
-            className="text-gray-800 hover:text-gray-600 text-sm font-semibold transition duration-300"
-          >
-            About
-          </button>
-        </div>
+  const navItems = ["home", "events", "activity", "trainer", "about"];
 
-        {/* Hamburger Menu (Mobile Only) */}
-        <div className="md:hidden">
+  return (
+    <motion.nav
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        isScrolled ? "bg-black/95 backdrop-blur-lg shadow-2xl" : "bg-black"
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+        <div className="flex items-center justify-between h-20">
+          {/* Logo */}
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            className="text-[#F1CE06] font-black text-2xl tracking-tighter cursor-pointer"
+          >
+            MUSCAL<span className="text-white">.</span>
+          </motion.div>
+
+          {/* Desktop Menu */}
+          <div className="hidden md:flex items-center space-x-1">
+            {navItems.map((item, index) => (
+              <motion.button
+                key={item}
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                onClick={() => scrollToSection(item)}
+                className="relative px-5 py-2 text-white/80 hover:text-[#F1CE06] text-sm font-semibold uppercase tracking-wider transition-colors duration-300 group"
+              >
+                {item}
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#F1CE06] transition-all duration-300 group-hover:w-full"></span>
+              </motion.button>
+            ))}
+          </div>
+
+          {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            type="button"
-            className="text-gray-800 focus:outline-none"
-            aria-controls="mobile-menu"
-            aria-expanded={isOpen ? "true" : "false"}
+            className="md:hidden relative w-10 h-10 flex flex-col items-center justify-center space-y-1.5 group"
           >
-            <span className="sr-only">Open main menu</span>
-            <i className="fas fa-bars text-lg"></i>
+            <motion.span
+              animate={{ rotate: isOpen ? 45 : 0, y: isOpen ? 8 : 0 }}
+              className="w-6 h-0.5 bg-[#F1CE06] transition-all duration-300"
+            />
+            <motion.span
+              animate={{ opacity: isOpen ? 0 : 1 }}
+              className="w-6 h-0.5 bg-[#F1CE06] transition-all duration-300"
+            />
+            <motion.span
+              animate={{ rotate: isOpen ? -45 : 0, y: isOpen ? -8 : 0 }}
+              className="w-6 h-0.5 bg-[#F1CE06] transition-all duration-300"
+            />
           </button>
         </div>
       </div>
 
-
-      {/* Mobile Menu with Animation */}
+      {/* Mobile Menu */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }} // Start invisible and above
-            animate={{ opacity: 1, y: 0 }} // Fade in and slide down
-            exit={{ opacity: 0, y: -20 }} // Fade out and slide up
-            transition={{ duration: 0.4, ease: "easeInOut" }} // Smooth transition
-            className="md:hidden px-6 py-4 space-y-4 bg-white rounded-lg shadow-lg absolute top-16 left-1 right-1/2 "
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="md:hidden bg-black border-t border-[#F1CE06]/20 overflow-hidden"
           >
-            {["home", "events", "activity", "trainer", "about"].map((section) => (
-              <motion.button
-                key={section}
-                onClick={() => scrollToSection(section)}
-                whileHover={{ scale: 1.05 }} // Slight scale on hover
-                whileTap={{ scale: 0.95 }} // Slight shrink when tapped
-                className="w-full text-gray-800 hover:text-gray-600 text-lg font-medium rounded-lg p-3 transition duration-300 transform focus:outline-none focus:ring-2 focus:ring-gray-600"
-              >
-                {section.charAt(0).toUpperCase() + section.slice(1)}
-              </motion.button>
-            ))}
+            <div className="px-6 py-6 space-y-2">
+              {navItems.map((item, index) => (
+                <motion.button
+                  key={item}
+                  initial={{ x: -50, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ delay: index * 0.05 }}
+                  onClick={() => scrollToSection(item)}
+                  className="block w-full text-left px-4 py-3 text-white hover:text-[#F1CE06] text-lg font-bold uppercase tracking-wide transition-colors duration-300"
+                >
+                  {item}
+                </motion.button>
+              ))}
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
-
-    </section>
+    </motion.nav>
   );
 }
 
