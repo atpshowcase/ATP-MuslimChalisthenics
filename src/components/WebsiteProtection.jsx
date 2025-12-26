@@ -56,31 +56,31 @@ function WebsiteProtection() {
 
       const warning = document.createElement('div');
       warning.id = 'inspect-warning';
-      warning.innerHTML = `
-        <div style="
-          position: fixed;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          background: black;
-          color: #F1CE06;
-          padding: 30px 50px;
-          border: 3px solid #F1CE06;
-          z-index: 999999;
-          font-family: Arial, sans-serif;
-          font-size: 18px;
-          font-weight: bold;
-          text-align: center;
-          box-shadow: 0 0 50px rgba(241, 206, 6, 0.5);
-          border-radius: 10px;
-        ">
-          <div style="font-size: 40px; margin-bottom: 15px;">🚫</div>
-          <div>INSPECT ELEMENT DISABLED</div>
-          <div style="font-size: 14px; margin-top: 10px; color: white;">
-            This action is not allowed
-          </div>
-        </div>
-      `;
+      // warning.innerHTML = `
+      //   <div style="
+      //     position: fixed;
+      //     top: 50%;
+      //     left: 50%;
+      //     transform: translate(-50%, -50%);
+      //     background: black;
+      //     color: #F1CE06;
+      //     padding: 30px 50px;
+      //     border: 3px solid #F1CE06;
+      //     z-index: 999999;
+      //     font-family: Arial, sans-serif;
+      //     font-size: 18px;
+      //     font-weight: bold;
+      //     text-align: center;
+      //     box-shadow: 0 0 50px rgba(241, 206, 6, 0.5);
+      //     border-radius: 10px;
+      //   ">
+      //     <div style="font-size: 40px; margin-bottom: 15px;">🚫</div>
+      //     <div>INSPECT ELEMENT DISABLED</div>
+      //     <div style="font-size: 14px; margin-top: 10px; color: white;">
+      //       This action is not allowed
+      //     </div>
+      //   </div>
+      // `;
 
       document.body.appendChild(warning);
       setTimeout(() => warning.remove(), 2000);
